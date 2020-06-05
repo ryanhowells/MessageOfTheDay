@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using System;
+using System.Text;
 
 namespace MessageOfTheDay.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        public string Message;
+        public string ImagePath;
+        private readonly IWebHostEnvironment _env;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IWebHostEnvironment env)
         {
-            _logger = logger;
+            _env = env;
         }
 
         public void OnGet()
         {
+            var dayofWeek = DateTime.UtcNow.DayOfWeek.ToString();
+            var path = (_env.WebRootPath + "/messages/" + dayofWeek + ".txt").ToLower();
+            string[] todaysMessageArray = System.IO.File.ReadAllLines(path);
+            StringBuilder sb = new StringBuilder();
+            foreach (string value in todaysMessageArray)
+            {
+                sb.Append(value);
+                _ = sb.Append("\n");
+            }
 
+            ImagePath = "/images/" + dayofWeek + ".jpg";
+            Message = sb.ToString();
         }
     }
 }
