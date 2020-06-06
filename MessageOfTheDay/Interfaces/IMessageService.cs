@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace MessageOfTheDay.Interfaces
 {
     public interface IMessageService
     {
-        public string GetMessage(string webRootPath, string languageCode, DayOfWeek dayOfWeek);
+        public Task<string> GetMessageAsync(string languageCode, DayOfWeek dayOfWeek);
 
-        public string FormatPath(string webRootPath, string languageCode, DayOfWeek dayOfWeek);
+        public string FormatPath(string languageCode, DayOfWeek dayOfWeek);
     }
 }

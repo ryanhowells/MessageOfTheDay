@@ -1,32 +1,41 @@
 ﻿using MessageOfTheDay.Constants;
 using MessageOfTheDay.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MessageOfTheDay.Services
 {
     public class MessageService : IMessageService
     {
-        public string GetMessage(string webRootPath, string languageCode, DayOfWeek dayOfWeek)
+        private readonly IWebHostEnvironment _env;
+
+        public MessageService(IWebHostEnvironment env)
         {
-            var path = FormatPath(webRootPath, languageCode, dayOfWeek);
-            string[] todaysMessageArray = System.IO.File.ReadAllLines(path);
+            _env = env;
+        }
+
+        public async Task<string> GetMessageAsync(string languageCode, DayOfWeek dayOfWeek)
+        {
+            var path = FormatPath(languageCode, dayOfWeek);
+            string[] todaysMessageArray = await System.IO.File.ReadAllLinesAsync(path);
             StringBuilder sb = new StringBuilder();
             foreach (string value in todaysMessageArray)
             {
                 sb.Append(value);
-                _ = sb.Append("\n");
+                sb.Append(Environment.NewLine);
             }
 
             return sb.ToString();
         }
 
-        public string FormatPath(string webRootPath, string languageCode, DayOfWeek dayOfWeek)
+        public string FormatPath(string languageCode, DayOfWeek dayOfWeek)
         {
             if (languageCode is null)
                 languageCode = LanguageCodes.English;
 
-            return webRootPath + "/messages/" + languageCode + "/" + dayOfWeek + ".txt";
+            return _env.WebRootPath + "/messages/" + languageCode + "/" + dayOfWeek + ".txt";
         }
     }
 }

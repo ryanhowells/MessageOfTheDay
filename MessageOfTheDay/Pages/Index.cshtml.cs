@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Threading.Tasks;
 
 namespace MessageOfTheDay.Pages
 {
@@ -16,41 +17,38 @@ namespace MessageOfTheDay.Pages
         public string Message;
         public string ImagePath;
 
-        private readonly IWebHostEnvironment _env;
         private readonly IMessageService _messageService;
         private readonly IImageService _imageService;
 
-        public IndexModel(IWebHostEnvironment env, IMessageService messageService, IImageService imageService)
+        public IndexModel(IMessageService messageService, IImageService imageService)
         {
-            _env = env;
             _messageService = messageService;
             _imageService = imageService;
         }
         
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             DayOfWeek dayOfWeek = DateTime.UtcNow.DayOfWeek;
-
-            var language = Request.Cookies["language"];
-            if (language != null)
-            {
-                CookieOptions options = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(30)
-                };
-
-                Response.Cookies.Append("language", language, options);
-            }
+            string language = Request.Cookies["language"];
 
             ImagePath = _imageService.Format(dayOfWeek);
-            Message = _messageService.GetMessage(_env.WebRootPath, language, dayOfWeek);
+            Message = await _messageService.GetMessageAsync(language, dayOfWeek);
         }
 
         public IActionResult OnPost()
         {
-            var existing = Request.Cookies["language"];
-            if (existing != Language && Language != null)
-                Response.Cookies.Append("language", Language);
+            var existingCookie = Request.Cookies["language"];
+            if (existingCookie != Language && Language != null)
+            {
+                CookieOptions options = new CookieOptions
+                {
+                    Expires = DateTime.UtcNow.AddYears(2),
+                    Secure = true,
+                    HttpOnly = true
+                };
+
+                Response.Cookies.Append("language", Language, options);
+            }
 
             return RedirectToPage();
         }
