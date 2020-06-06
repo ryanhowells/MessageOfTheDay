@@ -1,9 +1,10 @@
 ﻿using MessageOfTheDay.Interfaces;
+using System;
 
 namespace MessageOfTheDay.Services
 {
     public class ImageService : IImageService
     {
-        public string Format(string dayOfWeek) => "/images/" + dayOfWeek + ".jpg";
+        public string Format(DayOfWeek dayOfWeek) => "/images/" + dayOfWeek + ".jpg";
     }
 }

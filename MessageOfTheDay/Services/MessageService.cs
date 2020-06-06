@@ -1,12 +1,13 @@
 ﻿using MessageOfTheDay.Constants;
 using MessageOfTheDay.Interfaces;
+using System;
 using System.Text;
 
 namespace MessageOfTheDay.Services
 {
     public class MessageService : IMessageService
     {
-        public string GetMessage(string webRootPath, string languageCode, string dayOfWeek)
+        public string GetMessage(string webRootPath, string languageCode, DayOfWeek dayOfWeek)
         {
             var path = FormatPath(webRootPath, languageCode, dayOfWeek);
             string[] todaysMessageArray = System.IO.File.ReadAllLines(path);
@@ -20,7 +21,7 @@ namespace MessageOfTheDay.Services
             return sb.ToString();
         }
 
-        public string FormatPath(string webRootPath, string languageCode, string dayOfWeek)
+        public string FormatPath(string webRootPath, string languageCode, DayOfWeek dayOfWeek)
         {
             if (languageCode is null)
                 languageCode = LanguageCodes.English;

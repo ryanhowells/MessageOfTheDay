@@ -1,5 +1,6 @@
 ﻿using FluentAssert;
 using MessageOfTheDay.Services;
+using System;
 using Xunit;
 
 namespace MessageOfTheDayTests.Services
@@ -10,21 +11,21 @@ namespace MessageOfTheDayTests.Services
         {
             [Theory]
             [ClassData(typeof(TestData))]
-            public void ThenTheCorrectFormatIsReturned(string expectedOutput, string rootPath, string languageCode, string dayOfWeek)
+            public void ThenTheCorrectFormatIsReturned(string expectedOutput, string rootPath, string languageCode, DayOfWeek dayOfWeek)
             {
                 var messageService = new MessageService();
                 string result = messageService.FormatPath(rootPath, languageCode, dayOfWeek);
                 result.ShouldBeEqualTo(expectedOutput);
             }
 
-            public class TestData : TheoryData<string, string, string, string>
+            public class TestData : TheoryData<string, string, string, DayOfWeek>
             {
                 public TestData()
                 {
-                    Add("/root/path/messages/en/monday.txt", "/root/path", "en", "monday");
-                    Add("/root/path/messages/en/tuesday.txt", "/root/path", null, "tuesday");
-                    Add("/root/path/messages/de/wednesday.txt", "/root/path", "de", "wednesday");
-                    Add("/root/path/messages/fr/thursday.txt", "/root/path", "fr", "thursday");
+                    Add("/root/path/messages/en/Monday.txt", "/root/path", "en", DayOfWeek.Monday);
+                    Add("/root/path/messages/en/Tuesday.txt", "/root/path", null, DayOfWeek.Tuesday);
+                    Add("/root/path/messages/de/Wednesday.txt", "/root/path", "de", DayOfWeek.Wednesday);
+                    Add("/root/path/messages/fr/Thursday.txt", "/root/path", "fr", DayOfWeek.Thursday);
                 }
             }
         }

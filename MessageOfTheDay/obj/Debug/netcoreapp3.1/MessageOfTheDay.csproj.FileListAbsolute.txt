@@ -9,7 +9,6 @@ C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\bin\Debug\netcoreapp3
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\bin\Debug\netcoreapp3.1\MessageOfTheDay.pdb
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\bin\Debug\netcoreapp3.1\MessageOfTheDay.Views.dll
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\bin\Debug\netcoreapp3.1\MessageOfTheDay.Views.pdb
-C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\obj\Debug\netcoreapp3.1\MessageOfTheDay.csprojAssemblyReference.cache
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\obj\Debug\netcoreapp3.1\MessageOfTheDay.AssemblyInfoInputs.cache
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\obj\Debug\netcoreapp3.1\MessageOfTheDay.AssemblyInfo.cs
 C:\Users\Ryan\source\repos\MessageOfTheDay\MessageOfTheDay\obj\Debug\netcoreapp3.1\MessageOfTheDay.RazorAssemblyInfo.cache

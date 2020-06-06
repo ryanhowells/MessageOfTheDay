@@ -1,5 +1,6 @@
 ﻿using FluentAssert;
 using MessageOfTheDay.Services;
+using System;
 using Xunit;
 
 namespace MessageOfTheDayTests.Services
@@ -10,24 +11,24 @@ namespace MessageOfTheDayTests.Services
         {
             [Theory]
             [ClassData(typeof(TestData))]
-            public void ThenTheCorrectFormatIsReturned(string expectedOutput, string dayOfWeek)
+            public void ThenTheCorrectFormatIsReturned(string expectedOutput, DayOfWeek dayOfWeek)
             {
                 var imageService = new ImageService();
                 string result = imageService.Format(dayOfWeek);
                 result.ShouldBeEqualTo(expectedOutput);
             }
 
-            public class TestData : TheoryData<string, string>
+            public class TestData : TheoryData<string, DayOfWeek>
             {
                 public TestData()
                 {
-                    Add("/images/monday.jpg", "monday");
-                    Add("/images/tuesday.jpg", "tuesday");
-                    Add("/images/wednesday.jpg", "wednesday");
-                    Add("/images/thursday.jpg", "thursday");
-                    Add("/images/friday.jpg", "friday");
-                    Add("/images/saturday.jpg", "saturday");
-                    Add("/images/sunday.jpg", "sunday");
+                    Add("/images/Monday.jpg", DayOfWeek.Monday);
+                    Add("/images/Tuesday.jpg", DayOfWeek.Tuesday);
+                    Add("/images/Wednesday.jpg", DayOfWeek.Wednesday);
+                    Add("/images/Thursday.jpg", DayOfWeek.Thursday);
+                    Add("/images/Friday.jpg", DayOfWeek.Friday);
+                    Add("/images/Saturday.jpg", DayOfWeek.Saturday);
+                    Add("/images/Sunday.jpg", DayOfWeek.Sunday);
                 }
             }
         }

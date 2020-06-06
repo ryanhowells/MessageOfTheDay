@@ -10,8 +10,11 @@
             <form method="post">
                 <div class="column"></div>
                 <div class="col-md-6 column">
-                    <select asp-for="Language" asp-items="Model.Languages" class="form-control mt-2">
+                    <select asp-for="Language" class="form-control mt-2">
                         <option value="">Choose language</option>
+                        <option value="en">English</option>
+                        <option value="de">Deutsche</option>
+                        <option value="fr">Français</option>
                     </select>
                     <button type="submit" class="btn btn-primary mt-2">Select</button>
                 </div>

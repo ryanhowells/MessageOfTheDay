@@ -3,6 +3,6 @@ namespace MessageOfTheDay.Interfaces
 {
     public interface IImageService
     {
-        public string Format(string dayOfWeek);
+        public string Format(DayOfWeek dayOfWeek);
     }
 }
