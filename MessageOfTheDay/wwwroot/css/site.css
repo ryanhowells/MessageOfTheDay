@@ -12,6 +12,12 @@ a {
   color: #0366d6;
 }
 
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;

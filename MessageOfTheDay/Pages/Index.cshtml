@@ -1,9 +1,21 @@
 ﻿@page
 @model IndexModel
-@{
-}
 
-<div class="text-center">
-    <h1 class="display-4 message">@Model.Message</h1>
-    <img src="@Model.ImagePath" class="img-responsive" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group text-center">
+            <h1 class="display-4 message">@Model.Message</h1>
+            <img src="@Model.ImagePath" class="img-responsive" />
+
+            <form method="post">
+                <div class="column"></div>
+                <div class="col-md-6 column">
+                    <select asp-for="Language" asp-items="Model.Languages" class="form-control mt-2">
+                        <option value="">Choose language</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2">Select</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
