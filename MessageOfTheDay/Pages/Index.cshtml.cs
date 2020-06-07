@@ -1,6 +1,4 @@
-﻿using MessageOfTheDay.Constants;
-using MessageOfTheDay.Interfaces;
-using Microsoft.AspNetCore.Hosting;
+﻿using MessageOfTheDay.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,9 +11,10 @@ namespace MessageOfTheDay.Pages
     {
         [BindProperty]
         public string Language { get; set; }
-        
-        public string Message;
-        public string ImagePath;
+
+        public string Message { get; set; }
+
+        public string ImagePath { get; set; }
 
         private readonly IMessageService _messageService;
         private readonly IImageService _imageService;
